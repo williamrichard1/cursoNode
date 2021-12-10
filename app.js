@@ -10,7 +10,6 @@ const options = {
 };
 mongoose.connect(urlBd, options);
 
-
 mongoose.connection.on('error', (err) => {
     console.log('Erro na conexao: ' + err);
 });
@@ -31,28 +30,14 @@ app.use(bodyParser.json());
 
 const indexRoute = require('./Routes/index');
 const usersRoute = require('./Routes/users');
+const produtoRoute = require('./Routes/produtos');
+const comprasRoute = require('./Routes/compras');
 
 app.use('/', indexRoute);
 app.use('/users', usersRoute);
+app.use('/produtos', produtoRoute);
+app.use('/compras', comprasRoute);
 
-/*app.get('/', (req, res) => {
-    let obj = req.query;
-    //var mensagem = 'tudo ok GET, voce enviou o nome ' + obj.nome + ', com idade de ' + obj.idade + ' anos!'
-    return res.send({
-        mensagem: obj.mensagem,
-        nome: obj.nome,
-        idade: obj.idade
-    });
-});
-
-app.post('/', (req, res) => {
-    let obj = req.query;
-    return res.send({
-        mensagem: obj.mensagem,
-        nome: obj.nome,
-        idade: obj.idade
-    })
-})*/
 
 app.listen(3000);
 

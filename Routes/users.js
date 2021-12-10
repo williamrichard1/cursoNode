@@ -3,7 +3,7 @@ const router = express.Router();
 const user = require('../model/user');
 
 
-router.get('/', (req, res)=>{
+router.get('/', (req, res) => {
     user.find({}, (err, data)=>{
         if(err) return res.send({error: 'Erro na consulta Usuario'});
         return res.send(data);
