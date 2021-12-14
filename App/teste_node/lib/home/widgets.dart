@@ -9,32 +9,34 @@ class Widgets {
   Widgets(this.context);
 
   Widget corpoHome() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          _opcoesTela('Get Usuarios', 1),
-          listaUsuarios(),
-          _opcoesTela('Post Usuarios', 2),
-          SizedBox(
-            height: 20,
-          ),
-          _opcoesTela('Get Produtos', 3),
-          listaProdutos(),
-          _opcoesTela('Post Produtos', 4),
-          SizedBox(
-            height: 20,
-          ),
-          _opcoesTela('Get Compras', 5),
-          listaCompras(),
-          _opcoesTela('Post Compras', 6),
-          SizedBox(
-            height: 20,
-          ),
-        ],
+    return SingleChildScrollView(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            _opcoesTela('Get Usuarios', 1),
+            listaUsuarios(),
+            _opcoesTela('Post Usuarios', 2),
+            SizedBox(
+              height: 20,
+            ),
+            _opcoesTela('Get Produtos', 3),
+            listaProdutos(),
+            _opcoesTela('Post Produtos', 4),
+            SizedBox(
+              height: 20,
+            ),
+            _opcoesTela('Get Compras', 5),
+            listaCompras(),
+            _opcoesTela('Post Compras', 6),
+            SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -222,6 +224,7 @@ class Widgets {
 
   Widget listaCompras() {
     final homeStoreT = Provider.of<HomeStore>(context, listen: true);
+    final homeStore = Provider.of<HomeStore>(context, listen: false);
     return Observer(
       builder: (_) {
         return Container(
@@ -235,7 +238,64 @@ class Widgets {
                 visible: homeStoreT.visibilidadeCompras,
                 child: Column(
                   children: [
-                    Container(),
+                    homeStoreT.jsonCompras != null
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: homeStoreT.jsonCompras.length,
+                            itemBuilder: (_, int index) {
+                              return Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      homeStore.setVisibilidadeCompras(false);
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "${homeStoreT.jsonCompras[index]['_id']}",
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "${homeStoreT.jsonCompras[index]['user_id']['email']}",
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "${homeStoreT.jsonCompras[index]['produto_id']['nome']}",
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                ],
+                              );
+                            },
+                          )
+                        : Container(),
                     SizedBox(
                       height: 20,
                     )

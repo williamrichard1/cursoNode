@@ -45,26 +45,7 @@ class Functions {
     }
   }
 
-  Future postUser() async {
-    /*final homeStore = Provider.of<HomeStore>(context, listen: false);
-    if (!(await verificaInternet())) {
-      try {
-        var request = await http.get(Uri.parse('$_urlBanco/produtos'));
-        var jsonRequest = await json.decode(request.body);
-        if (jsonRequest != null) {
-          homeStore.setJsonProdutos(jsonRequest);
-          print("JSON PRODUTOS >> ${homeStore.jsonProdutos}");
-          print("DEU CERTO!!!");
-        } else {
-          print("JSON TA VAZIO");
-        }
-      } catch (e) {
-        print("ERRO GET USERS>> $e");
-      }
-    } else {
-      print("SEM INTERNET");
-    }*/
-  }
+  Future postUser() async {}
 
   Future getProdutos() async {
     final homeStore = Provider.of<HomeStore>(context, listen: false);
@@ -95,7 +76,21 @@ class Functions {
   }
 
   Future getCompras() async {
+    final homeStore = Provider.of<HomeStore>(context, listen: false);
     if (!(await verificaInternet())) {
+      try {
+        var request = await http.get(Uri.parse('$_urlBanco/compras'));
+        var jsonRequest = await json.decode(request.body);
+        if (jsonRequest != null) {
+          homeStore.setJsonCompras(jsonRequest);
+          print("JSON COMPRAS >> ${homeStore.jsonCompras}");
+          print("DEU CERTO!!!");
+        } else {
+          print("JSON TA VAZIO");
+        }
+      } catch (e) {
+        print("ERRO GET USERS>> $e");
+      }
     } else {
       print("SEM INTERNET");
     }
