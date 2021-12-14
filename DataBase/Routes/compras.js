@@ -7,7 +7,8 @@ router.get('/', (req, res) => {
     compra.find({}, (err, data)=>{
         if(err) return res.send({error: 'Erro na consulta PRODUTO'});
         return res.send(data);
-    })
+    }).populate('user_id')
+      .populate('produto_id');
 });
 
 router.post('/create', (req, res) => {
