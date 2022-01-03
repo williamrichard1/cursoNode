@@ -269,7 +269,7 @@ class Widgets {
                                               MainAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "${homeStoreT.jsonCompras[index]['user_id']['email']}",
+                                              "${homeStoreT.jsonCompras[index]['usuario']['email']}",
                                             ),
                                           ],
                                         ),
@@ -281,10 +281,34 @@ class Widgets {
                                               MainAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "${homeStoreT.jsonCompras[index]['produto_id']['nome']}",
+                                              "${homeStoreT.jsonCompras[index]['usuario']['nome']}",
                                             ),
                                           ],
                                         ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "${homeStoreT.jsonCompras[index]['produto']['nome']}",
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "${homeStoreT.jsonCompras[index]['produto']['preco']}",
+                                            ),
+                                          ],
+                                        )
                                       ],
                                     ),
                                   ),

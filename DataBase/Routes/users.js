@@ -11,9 +11,9 @@ router.get('/', (req, res) => {
   
 });
 
-router.post('/create', (req, res) => {
-    const {email, password} = req.body;
-    if(!email || !password) return res.send({error: 'Dados Insuficientes'});
+router.post('/', (req, res) => {
+    const {email, password, nome, cpf} = req.body;
+    if(!email || !password || !nome || !cpf) return res.send({error: 'Dados Insuficientes'});
     user.findOne({email}, (err, data)=>{
         if(err) return res.send({error: 'ERRO AO BUSCAR USUARIO' + err});
         if(data) return res.send({error: 'Usuario ja registrado' + err});

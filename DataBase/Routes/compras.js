@@ -7,13 +7,13 @@ router.get('/', (req, res) => {
     compra.find({}, (err, data)=>{
         if(err) return res.send({error: 'Erro na consulta PRODUTO'});
         return res.send(data);
-    }).populate('user_id')
-      .populate('produto_id');
+    }).populate('usuario')
+      .populate('produto');
 });
 
-router.post('/create', (req, res) => {
-    const {user_id, produto_id} = req.body;
-    if(!user_id || !produto_id) return res.send({error: 'Dados Insuficientes'});
+router.post('/', (req, res) => {
+    const {usuario, produto} = req.body;
+    if(!usuario || !produto) return res.send({error: 'Dados Insuficientes'});
     
     compra.create(req.body, (err, data)=>{
         if(err) return res.send({error: 'erro ao criar COMPRA ' + err});

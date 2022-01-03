@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.post('/create', (req, res) => {
+router.post('/', (req, res) => {
     const {nome, preco} = req.body;
     if(!nome || !preco) return res.send({error: 'Dados Insuficientes'});
     produto.findOne({nome}, (err, data)=>{

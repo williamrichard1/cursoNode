@@ -101,9 +101,9 @@ class Functions {
     if (!(await verificaInternet())) {
       try {
         var request =
-            await http.post(Uri.parse('$_urlBanco/compras/create'), body: {
-          "user_id": homeStore.usuarioSelec,
-          "produto_id": homeStore.produtoSelec,
+            await http.post(Uri.parse('$_urlBanco/compras'), body: {
+          "usuario": homeStore.usuarioSelec,
+          "produto": homeStore.produtoSelec,
         });
         var jsonRequest = await json.decode(request.body);
         if (jsonRequest != null) {

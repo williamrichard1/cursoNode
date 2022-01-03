@@ -13,9 +13,19 @@ const userSchema = new schema({
         required: true,
         select: false // para campo nao aparecer no get
     },
+    nome: {
+        type: String,
+        required: true,
+    },
+    cpf:{
+        type: String,
+        required: true,
+        unique: true,
+    },
     created: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        select: false
     }
 });
 
