@@ -4,11 +4,19 @@ const user = require('../model/user');
 
 
 router.get('/', (req, res) => {
-    user.find({}, (err, data)=>{
+
+    const parametro = req.query;
+
+    if(!parametro.idUsuario) return user.find({}, (err, data) => {
         if(err) return res.send({error: 'Erro na consulta Usuario'});
         return res.send(data);
     })
-  
+
+    user.find({_id: parametro.idUsuario}, (err, data) => {
+        if(err) return res.send({error: 'Erro na consulta Usuario'});
+        return res.send(data);
+    });
+
 });
 
 router.post('/', (req, res) => {
